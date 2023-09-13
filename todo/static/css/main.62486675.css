@@ -1,0 +1,9 @@
+*{box-sizing:border-box}*,html{margin:0;padding:0}
+
+body{background-image:linear-gradient(35deg,rgba(0,0,0,.5),rgba(0,0,0,.5)), url('./../media/toDolist.ad8f208b322352dd99b6.jpeg');
+    
+    background-size:100%
+}
+
+.App{background-color:rgba(0,0,0,.7);border:2.5px solid;border-bottom-left-radius:50px;border-bottom-right-radius:43px;flex-direction:column;margin:0 auto;position:relative;top:50px;width:500px}.App,header{align-items:center;border-top-left-radius:50px;border-top-right-radius:43px;display:flex;justify-content:center}header{background-color:rgba(255,206,100,.8);flex-grow:1;font-size:18px;padding:1em;width:100%}main{align-items:center;display:flex;flex-direction:column;justify-content:center}main,ul{width:100%}.li-tiem{align-items:center;background-color:#fff;display:flex;font-size:20px;justify-content:space-between;margin:10px;padding:.5rem 0 .5rem .5rem}.li-tiem input[type=checkbox]{cursor:pointer;height:2.8rem;margin-right:.8rem;width:2.5rem}label:hover{color:rgba(11,2,2,.7);text-decoration:underline}.li-tiem svg{color:#d50a0a}.li-tiem svg,label{cursor:pointer;font-size:30px}label{color:#0b0202;padding:.4rem}.addlist-input{padding:10PX;width:340px}.addlist-input ::-webkit-input-placeholder{color:#a9a9a9}.addlist-input ::placeholder{color:#a9a9a9}.serchlist{margin-bottom:9px;padding:10PX;width:340px}.delbut{margin-right:22px}footer{align-content:center;background-color:rgba(255,206,100,.8);border-bottom-left-radius:50px;border-bottom-right-radius:43px;display:flex;flex-grow:1;justify-content:center;padding:1em;width:100%}.add-list{display:flex;margin-bottom:15px;margin-top:15px;width:340px}.list-count{color:#f5f5f5;font-size:30px;font-weight:900}.add-button{cursor:pointer;font-size:18px;margin:10px}.add-button-out{background-color:#3ac60f}.empt-list{color:#f0f8ff;font-size:30px;font-weight:900;padding:30px}
+/*# sourceMappingURL=main.62486675.css.map*/
