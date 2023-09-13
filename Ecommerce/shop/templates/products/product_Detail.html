@@ -1,0 +1,183 @@
+{% extends "layouts/main.html" %}
+{% block title %}
+online shoping
+{% endblock title %}
+
+{% block content %}
+    
+
+   <section class="bg-light py-4 my-5" style="min-height: 450px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h4 class="mb-3">
+                  {{Product}} Details</h4>
+                <hr style="border-color: #b8bfc2;">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="{% url 'home'%}">Home</a></li>
+                      <li class="breadcrumb-item"><a href="{% url 'collections' Product.Catagory.name %}">{{Product.Catagory.name}} Collection </a></li>
+                      <li class="breadcrumb-item active" aria-current="page">{{Product}}</li>
+                    </ol>
+                  </nav>
+                  {% include "inc/message.html" %}
+            </div>
+            <div class="col-4 my-3 hot-box">
+                {% if Product.trending %}
+                <div class="hot">Hot</div>
+                {% endif %}
+            <img src="{{Product.product_image.url}}" class="card-image-top" style=" width:100%; padding:10px ;" alt="product">
+            </div>
+            
+            <div class="col-8 my-3">
+                <h5 class="text-success"> {{Product}}</h5> 
+                <p> Vendor :{{Product.vendor}} </p>
+                <p>{{Product.description}}</p>
+                <h6 class="my-2 text-danger">Current Price : Rs.s <s>{{Product.original_price}}</s></h6>
+                <h5 class="my-2 text-primary">Offer Price : Rs.{{Product.selling_price}}</h5>
+            
+                <div class="my-3 ">
+                    
+                    {% if Product.quantity > 0 %}
+                    <input type="hidden" value="{{Product.id}}" id="pid">
+                    <input type="hidden" value="{{Product.quantity}}" id="quantity">
+
+                    <!-- {% csrf_token %} -->
+                    <p>
+                        <div class="input-group" style="width: 150px;">
+                            <button class="input-group-text bg-success text-light" id="btnMinus"><i class="fa fa-minus" ></i></button>
+                                <input type="text" name="qty" id="txtQty" value="1" class="form-control text-center">
+                            <button class="input-group-text bg-success text-light" id="btnPlus"><i class="fa fa-plus"></i></button>
+
+                        </div>
+                    </p>
+                    <button class="btn btn-primary" id="btnCart"><i class="fa fa-shopping-cart"></i> Add to Your Cart</button>
+                    {% else  %}
+                    <button class="btn btn-secondary"><i class="fa fa-minus"></i> Out of Stock</button>
+                    {% endif %}
+                    <button class="btn btn-danger" id="btnfav"><i class="fa fa-heart" ></i></button>
+                    <div>
+                    <button class="btn btn-warning" style="margin-top: 10px; " id="buy" onclick="buyfn()"><i class="fa fa-truck" style="color: black; font-size: medium; " ></i> Buy to your product</button>
+                 </div>
+                </div>
+            </div>    
+           
+        
+        </div>
+    </div>
+   </section>
+   <script>
+    document.addEventListener("DOMContentLoaded",function(event){
+        const btnPlus=document.getElementById("btnPlus");
+        const btnMinus=document.getElementById("btnMinus");
+        const txtQty=document.getElementById("txtQty");
+        const pid=document.getElementById("pid");
+        //const tkn=document.querySelector('[name="csrfmiddlewaretoken"]').value;
+        const btnCart=document.getElementById("btnCart");
+        const quantity=document.getElementById("quantity").value;
+        const btnfav =document.getElementById('btnfav')
+
+        btnPlus.addEventListener('click',function(){
+            let qty=parseInt(txtQty.value,10);
+            qty=isNaN(qty)?0:qty;
+            console.log(quantity)
+            if(qty<quantity){
+            qty++
+            txtQty.value=qty
+        }else{
+            alert('This Product is Out of Stock')
+        }
+            
+        })
+
+        btnMinus.addEventListener('click',function(){
+            let qty=parseInt(txtQty.value,10);
+            qty=isNaN(qty)?0:qty;
+           
+            if(qty>1){
+                qty--
+                txtQty.value=qty
+            }
+        })
+
+        btnCart.addEventListener('click',function(){
+            let qty=parseInt(txtQty.value,10);
+            qty=isNaN(qty)?0:qty;
+           
+            if(qty>0){
+                let postobj={
+                    'product_qty':qty,
+                    'pid':pid.value,
+                    //token:tkn
+                }
+                console.log(postobj)
+                fetch('/addToCart',{
+                    method:'POST',
+                    credentials:"same-origin",
+                    headers:{
+                        'Accept':'application/json',
+                        'X-Request-With':'XMLHttpRequest',
+                        'X-CSRFToken':'{{csrf_token}}',
+                    },
+                    body:JSON.stringify(postobj)
+                }).then(response=> {
+                    return response.json();
+                }).then(data=>{
+                    //console.log(data)
+                    alert(data['status'])
+                })
+
+
+
+
+
+
+                
+            }
+            else{
+                alert("Please Enter the Quantity")
+            }
+        })
+
+
+        
+        btnfav.addEventListener('click',function(){
+           
+                let postobj={
+                    
+                    'pid':pid.value,
+                    //token:tkn
+                }
+                console.log(postobj)
+                fetch('/fav',{
+                    method:'POST',
+                    credentials:"same-origin",
+                    headers:{
+                        'Accept':'application/json',
+                        'X-Request-With':'XMLHttpRequest',
+                        'X-CSRFToken':'{{csrf_token}}',
+                    },
+                    body:JSON.stringify(postobj)
+                }).then(response=> {
+                    return response.json();
+                }).then(data=>{
+                    //console.log(data)
+                    alert(data['status'])
+                })
+                
+          
+        })
+
+
+        
+    });
+
+
+   function buyfn(){
+    alert('Your Order has been placed ')
+   }
+
+
+   </script>
+
+{% endblock content %}

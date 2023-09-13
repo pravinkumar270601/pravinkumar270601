@@ -1,0 +1,55 @@
+.carousel-item img{
+    height: 60vh;
+    overflow: hidden;
+    background-size: 100%;
+}
+
+html{
+    font-size: 14px;
+}
+
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
+}
+
+a{
+    text-decoration: none;
+}
+
+.old-price{
+    font-weight: bold;
+    color: red;
+}
+
+.new-price{
+    font-weight: bold;
+    background-color: green;
+    color: white;
+    padding: 0px 2px;
+    border-radius: 5px;
+    
+}
+.fa {
+    color:white;
+}
+
+.hot-box{
+    position: relative;
+}
+
+.hot{
+    background-color: rgb(240, 31, 31);
+    color: rgb(253, 249, 249);
+    display: inline-block;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 0px 2px;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.product-t{
+    display: flex;
+}
